@@ -1,4 +1,1 @@
-config/site.php
-files/cache/*
-files/tmp/*
-.htaccess
+.idea/*
