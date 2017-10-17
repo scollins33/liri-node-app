@@ -76,7 +76,7 @@ function searchSongAPI(pSong) {
                         allArtists += (pArtist.name + ', ');
                     });
 
-                    console.log('-------'+  +'-------');
+                    console.log('--------------');
                     console.log('Artist(s): ' + allArtists);
                     console.log('Song Name: ' + pEach.name);
                     console.log('Preview URL: ' + pEach.preview_url);
