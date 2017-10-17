@@ -18,7 +18,7 @@ switch (command) {
         postMyTweet(process.argv[3]);
         break;
     case 'spotify-this-song':
-        searchSong(process.argv[3]);
+        searchSongAPI(process.argv[3]);
         break;
     default:
         console.log('No matching command!');
@@ -58,11 +58,35 @@ function postMyTweet(pTweet) {
     }
 }
 
-function searchSong(pSong) {
+function searchSongAPI(pSong) {
+    var apiURL = 'https://api.spotify.com/v1/search?limit=3&type=track&q=';
+    var query = pSong.replace(/ /g, '%20');
+
     spotifyClient
-        .search({type: 'track', query: pSong})
+        .request(apiURL + query)
         .then(function (response) {
-            console.log(response.tracks.items[0]);
+            var responseItems = response.tracks.items;
+
+            if (responseItems.length > 0) {
+                responseItems.forEach(function (pEach) {
+                    var responseArtists = pEach.artists;
+                    var allArtists = '';
+
+                    responseArtists.forEach(function (pArtist) {
+                        allArtists += (pArtist.name + ', ');
+                    });
+
+                    console.log('-------'+  +'-------');
+                    console.log('Artist(s): ' + allArtists);
+                    console.log('Song Name: ' + pEach.name);
+                    console.log('Preview URL: ' + pEach.preview_url);
+                    console.log('Album Name: ' + pEach.album.name);
+                    console.log('--------------');
+                });
+            }
+            else {
+                searchSongAPI('The Sign Ace of Base');
+            }
         })
         .catch(function (err) {
             console.log(err);
