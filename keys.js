@@ -12,7 +12,12 @@ var spotifyKeys = {
     secret: 'a9fd86712a134a27b98ff51f6c4ae8c6'
 };
 
+var imdbKeys = {
+    key: '40e9cece'
+};
+
 module.exports = {
     twitterKeys,
-    spotifyKeys
+    spotifyKeys,
+    imdbKeys
 };
